@@ -78,10 +78,10 @@ necessary to override the start() method
 //		TestTimeLine(stage);
 //		TestCuePoint(stage);
 //		TestPixel(stage);
-//		TestPath(stage);
+		TestPath(stage);
 		
-//		TestShape();
-		TestClear();
+		TestShape();
+//		TestClear();
 	}
 	public void TestClear(){
 		Stage stage=new Stage();
