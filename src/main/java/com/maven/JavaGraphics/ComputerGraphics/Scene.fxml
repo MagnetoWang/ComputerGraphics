@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.canvas.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<FlowPane fx:id="PaneLine" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="992.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Canvas fx:id="canvasLine" height="500.0" width="600.0" />
+      <Button mnemonicParsing="false" text="Button" />
+      <VBox prefHeight="445.0" prefWidth="320.0" />
+   </children>
+</FlowPane>
