@@ -1,24 +1,23 @@
 package com.maven.JavaGraphics.ComputerGraphics;
+
+import com.maven.JavaGraphics.ComputerGraphics.Xform.RotateOrder;
+
 import javafx.scene.Group;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Scale;
 import javafx.scene.transform.Translate;
-//
-//Xform.java is a class that extends the Group class. It is used in the 
-//MoleculeSampleApp application that is built using the Getting Started with JavaFX
-//3D Graphics tutorial. The method allows you to add your own transforms and rotation.
-//
-/** 
-*
-* @ClassName : Xform.java
-* @author : Magneto_Wang
-* @date  2018年5月15日 下午1:36:12
-* @Description  TODO
-* 
-*/
-public class Xform extends Group  {
 
-public enum RotateOrder {
+public class Matrix3D extends Group{
+
+	/** 
+	*
+	* @ClassName : Matrix3D.java
+	* @author : Magneto_Wang
+	* @date  2018年5月15日 下午11:08:25
+	* @Description  TODO
+	* 
+	*/
+	public enum RotateOrder {
         XYZ, XZY, YXZ, YZX, ZXY, ZYX
     }
 
@@ -27,65 +26,19 @@ public enum RotateOrder {
     public Translate ip = new Translate(); 
     public Rotate rx = new Rotate();
     { rx.setAxis(Rotate.X_AXIS); }
-    
-
-    public Translate getT() {
-		return t;
-	}
-
-	public void setT(Translate t) {
-		this.t = t;
-	}
-
-	public Translate getP() {
-		return p;
-	}
-
-	public void setP(Translate p) {
-		this.p = p;
-	}
-
-	public Translate getIp() {
-		return ip;
-	}
-
-	public void setIp(Translate ip) {
-		this.ip = ip;
-	}
-
-	public Scale getS() {
-		return s;
-	}
-
-	public void setS(Scale s) {
-		this.s = s;
-	}
-
-	public Rotate getRx() {
-		return rx;
-	}
-
-	public Rotate getRy() {
-		return ry;
-	}
-
-	public Rotate getRz() {
-		return rz;
-	}
-
-	public Rotate ry = new Rotate();
+    public Rotate ry = new Rotate();
     { ry.setAxis(Rotate.Y_AXIS); }
-    
     public Rotate rz = new Rotate();
     { rz.setAxis(Rotate.Z_AXIS); }
     public Scale s = new Scale();
-
-    public Xform() { 
+    public double Matrix3D[][] = new double[4][4];
+    public double Matrix[] = new double[4];
+    public Matrix3D() { 
         super(); 
         getTransforms().addAll(t, rz, ry, rx, s); 
     }
 
-    public Xform(RotateOrder rotateOrder) { 
+    public Matrix3D(RotateOrder rotateOrder) { 
         super(); 
         // choose the order of rotations based on the rotateOrder
         switch (rotateOrder) {
@@ -172,23 +125,6 @@ public enum RotateOrder {
         ip.setY(-y);
         ip.setZ(-z);
     }
-    
-    /*
-     * 
-     * (non-Javadoc)
-     * @see java.lang.Object#clone()
-     * 
-     * 暂时还不是能很好的处理克隆问题
-     */
-    public Xform clone(){
-    	Xform object = new Xform();
-//    	object.getChildren().add(this.getChildren().get(0).g);
-    	object.setTranslate(this.getTranslateX(), this.getTranslateY(), this.getTranslateZ());
-    	object.setScale(this.getScaleX(),this.getScaleY(),this.getScaleZ());
-    	object.setRotate(this.rx.getAngle(), this.ry.getAngle(), this.rz.getAngle());
-    	
-    	return object;
-    }
 
     public void reset() {
         t.setX(0.0);
@@ -223,26 +159,4 @@ public enum RotateOrder {
         ip.setZ(0.0);
     }
 
-    public void debug() {
-        System.out.println("t = (" +
-                           t.getX() + ", " +
-                           t.getY() + ", " +
-                           t.getZ() + ")  " +
-                           "r = (" +
-                           rx.getAngle() + ", " +
-                           ry.getAngle() + ", " +
-                           rz.getAngle() + ")  " +
-                           "s = (" +
-                           s.getX() + ", " + 
-                           s.getY() + ", " + 
-                           s.getZ() + ")  " +
-                           "p = (" +
-                           p.getX() + ", " + 
-                           p.getY() + ", " + 
-                           p.getZ() + ")  " +
-                           "ip = (" +
-                           ip.getX() + ", " + 
-                           ip.getY() + ", " + 
-                           ip.getZ() + ")");
-    }
 }
