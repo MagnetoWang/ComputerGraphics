@@ -2,8 +2,13 @@ package com.maven.JavaGraphics.ComputerGraphics;
 
 
 
-import com.maven.JavaGraphics.ComputerGraphics.Xform.RotateOrder;
+import java.util.Scanner;
 
+import com.maven.JavaGraphics.ComputerGraphics.Xform.RotateOrder;
+import com.sun.prism.shader.DrawCircle_LinearGradient_PAD_AlphaTest_Loader;
+
+import javafx.animation.RotateTransition;
+import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -18,7 +23,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
 import javafx.scene.shape.Cylinder;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Shape3D;
 import javafx.scene.shape.Sphere;
+import javafx.scene.shape.TriangleMesh;
+import javafx.scene.shape.VLineTo;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
@@ -164,7 +173,12 @@ public class ThreeD extends Application{
             }
         });
     }
-
+    /***
+     * @SEE 键盘控制函数。包装好的键盘SWTICH。后续添加的功能在switch中修改就可以了
+     * 也可以当作一个模板。后面在改进
+     * @param scene
+     * @param root
+     */
     private void handleKeyboard(Scene scene, final Node root) {
         @SuppressWarnings("unused")
 		final boolean moveCamera = true;
@@ -184,13 +198,18 @@ public class ThreeD extends Application{
                         cameraXform2.t.setY(0.0);
                         break;
                     case X:
-                        if (event.isControlDown()) {
-                            if (axisGroup.isVisible()) {
-                                axisGroup.setVisible(false);
-                            } else {
-                                axisGroup.setVisible(true);
-                            }
-                        }
+//                        if (event.isControlDown()) {
+//                            if (axisGroup.isVisible()) {
+//                                axisGroup.setVisible(false);
+//                            } else {
+//                                axisGroup.setVisible(true);
+//                            }
+//                        }
+                      if (axisGroup.isVisible()) {
+                    	  axisGroup.setVisible(false);
+                      } else {
+                    	  axisGroup.setVisible(true);
+                      }
                         break;
                     case S:
                         if (event.isControlDown()) {
@@ -202,13 +221,7 @@ public class ThreeD extends Application{
                         }
                         break;
                     case SPACE:
-                        if (timelinePlaying) {
-                            timeline.pause();
-                            timelinePlaying = false;
-                        } else {
-                            timeline.play();
-                            timelinePlaying = true;
-                        }
+
                         break;
                     case UP:
                         if (event.isControlDown() && event.isShiftDown()) {
@@ -279,7 +292,7 @@ public class ThreeD extends Application{
 //        	objectGroup.setRotate(60);
         	
         	objectGroup.setVisible(true);
-        	world.getChildren().addAll(objectGroup);
+//        	world.getChildren().addAll(objectGroup);
     }
     public Xform buildBox(double width, double height, double depth,PhongMaterial Material){
     	Xform ObjectBox=new Xform(axisOrder);
@@ -310,15 +323,189 @@ public class ThreeD extends Application{
 		
 		
 		
-		
+		//设置相机
 		buildCamera();
+		//设置坐标轴
 		buildAxes();
+		//建立初始目标对象
 		buildObject(); 
+		solveFirstQuestion();
+
+
+        
+        
+		LinearSymmetry();
+		
+		handleKey(scene,world);
+		
+		world.getChildren().addAll(objectGroup);
+		root.getChildren().addAll(world);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		scene.setCamera(camera);
+    }
+	public void KeyEventPaint(){
+		final PhongMaterial Material = new PhongMaterial(Color.BLACK);
+		Xform OriginalObject =buildBox(10, 10, 10, Material);
+		
+
+	}
+	public static int Keyflag=0;
+	public void handleKey(Scene scene, final Node root) {
+        @SuppressWarnings("unused")
+		final boolean moveCamera = true;
+        
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @SuppressWarnings("incomplete-switch")
+			public void handle(KeyEvent event) {
+                @SuppressWarnings("unused")
+				Duration currentTime;
+                
+                switch (event.getCode()) {
+                    case SPACE:
+                    	if(Keyflag==0){
+                    		drawPoint();
+                    	}
+                    	
+                    	if(Keyflag==1){
+                    		drawLine();
+                    	}
+                    	
+                    	if(Keyflag==2){
+                    		drawTran();
+                    	}
+                    	if(Keyflag==3){
+                    		drawTranAnimation();
+                    	}
+                    	Keyflag++;
+                    	
+
+                        break;
+
+                }
+            }
+        });
+    }
+	/***
+	 * 画点，画线,长度默认10
+	 */
+	public void drawPoint(){
+		Xform Object =new Xform();
+		final PhongMaterial Material = new PhongMaterial(Color.ORANGE);
+		Sphere boll=new Sphere(10);
+		boll.setMaterial(Material);
+		
+		Object.getChildren().add(boll);
+		Object.setTranslate(-20, -20, -20);
+		Object.setVisible(true);
+		objectGroup.getChildren().add(Object);
+	}
+	public void drawLine(){
+		Xform Object =new Xform();
+		final PhongMaterial Material = new PhongMaterial(Color.ORANGE);
+		Cylinder line_=new Cylinder(1,1000);
+		line_.setMaterial(Material);
+		
+		Object.getChildren().add(line_);
+		Object.setTranslate(-10, 15, 15);
+		Object.setVisible(true);
+		Object.setRotate(60);
+		objectGroup.getChildren().add(Object);
+	}
+	public void drawTran(){
+		Xform Object =new Xform();
+		final PhongMaterial Material = new PhongMaterial(Color.ORANGE);
+		Cylinder line_1=new Cylinder(0.5,100);
+		Cylinder line_2=new Cylinder(0.5,100);
+		Cylinder line_3=new Cylinder(0.5,100);
+		line_1.setRotate(30);
+		line_2.setRotate(-30);
+		line_3.setRotate(90);
+		line_1.setTranslateY(-25);
+		line_1.setTranslateX(-25);
+		line_2.setTranslateY(-25);
+		line_2.setTranslateX(25);
+		line_3.setTranslateY(18);
+		Object.getChildren().add(line_1);
+		Object.getChildren().add(line_2);
+		Object.getChildren().add(line_3);
+		Object.setTranslate(-20, 20, -40);
+		Object.setVisible(true);
+		objectGroup.getChildren().add(Object);
+	}
+	public void drawTranAnimation() {
+		Xform Object =new Xform();
+		final PhongMaterial Material = new PhongMaterial(Color.ORANGE);
+		Cylinder line_1=new Cylinder(0.5,100);
+		Cylinder line_2=new Cylinder(0.5,100);
+		Cylinder line_3=new Cylinder(0.5,100);
+		line_1.setRotate(30);
+		line_2.setRotate(-30);
+		line_3.setRotate(90);
+		line_1.setTranslateY(-25);
+		line_1.setTranslateX(-25);
+		line_2.setTranslateY(-25);
+		line_2.setTranslateX(25);
+		line_3.setTranslateY(18);
+		Object.getChildren().add(line_1);
+		Object.getChildren().add(line_2);
+		Object.getChildren().add(line_3);
+		Object.setTranslate(-20, 20, -40);
+		Object.setVisible(true);
+		objectGroup.getChildren().add(Object);
+		
+		
+		 RotateTransition rotateTransition = 
+		            new RotateTransition(Duration.millis(2000), Object);
+		        rotateTransition.setByAngle(180f);
+		        rotateTransition.setCycleCount(4);
+		        rotateTransition.setAutoReverse(true);
+		
+		SequentialTransition sequentialTransition;
+        sequentialTransition = new SequentialTransition();
+        sequentialTransition.getChildren().addAll(rotateTransition);
+        sequentialTransition.setCycleCount(Timeline.INDEFINITE);
+        sequentialTransition.setAutoReverse(true);
+        sequentialTransition.play();   
+
+	}
+	public void LinearSymmetry(){
+		Scanner in = new Scanner(System.in);
+		System.out.println("输入目标坐标 ");
+		System.out.println("输入x:");
+		int x = 50;//in.nextInt();
+		System.out.println("输入y:");
+		int y = 10;//in.nextInt();
+		x=-x;
+		y=-y;
+		final PhongMaterial Material = new PhongMaterial(Color.BLUEVIOLET);
+		Xform OriginalObject =buildBox(10, 10, 10, Material);
+		OriginalObject.setTranslate(x,y,0.0);
+//    	Box Object_One = new Box(10, 10	, 10);
+//    	objectGroup.setTranslate(x,y,0.0);
+//    	Object_One.setMaterial(Material);
+    	objectGroup.getChildren().add(OriginalObject);
+    	objectGroup.setVisible(true);
+    	
+    	int y0=x+5;
+    	int x0=y-5;
+    	Xform ObjectTwo =buildBox(10, 10, 10, Material);
+    	ObjectTwo.setTranslate(x0,y0,0.0);
+    	objectGroup.getChildren().add(ObjectTwo);
+    	objectGroup.setVisible(true);
+    	in.close();
+
+	}
+	public void solveFirstQuestion(){
+
 		Xform OriginalObject =buildBox(10, 10	, 10, redMaterial); //=objectGroup.clone();
 //		world.getChildren().add(OriginalObject);
-   		objectGroup.setTranslate(10.0,20.0,10.0);
-		objectGroup.setScale(2.0,1.0,0.5);
-		
+		Xform ObjectTwo = buildBox(10, 10, 10, redMaterial);
+		ObjectTwo.setTranslate(10.0,20.0,10.0);
+		ObjectTwo.setScale(2.0,1.0,0.5);
+		objectGroup.getChildren().add(OriginalObject);
+    	objectGroup.getChildren().add(ObjectTwo);
+    	objectGroup.setVisible(true);
 //		Group cameraGroup = new Group();
 //		cameraGroup.getChildren().add(camera);
 //		root.getChildren().add(cameraGroup);
@@ -338,16 +525,7 @@ public class ThreeD extends Application{
 //        final Xform world = new Xform();
 //        world.getChildren().add(myBox);
 //        world.getChildren().add(myCylinder);
-        
-        
-        
-		
-		
-		root.getChildren().addAll(world);
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		scene.setCamera(camera);
-    }
+	}
 
 	
 	//
