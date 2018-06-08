@@ -25,7 +25,6 @@ public class Hermite extends Application{
     public Group root = new Group();
 	public Canvas canvas = new Canvas(800, 600);
 	GraphicsContext gc = canvas.getGraphicsContext2D();
-	// public Parent root;
 	public Scene scene;
 
 	@Override
@@ -48,10 +47,10 @@ public class Hermite extends Application{
 	 * @param primaryStage
 	 */
 	public void DrawHermite(int points,Stage primaryStage){
-		Point2D p1=new Point2D(100, 200);
-		Point2D p4=new Point2D(400,100);
-		Point2D r1=new Point2D(200, 100);
-		Point2D r4=new Point2D(-300,0);
+		Point2D p1=new Point2D(100,200);
+		Point2D p4=new Point2D(100,200);
+		Point2D r1=new Point2D(100,400);
+		Point2D r4=new Point2D(-400,100);
 //		Point2D tempC0=new Point2D(x, y);
 		int n=points;
 		//要想画理想图，都是要对缩放特别设置

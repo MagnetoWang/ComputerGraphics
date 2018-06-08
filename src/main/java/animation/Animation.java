@@ -51,16 +51,17 @@ public class Animation extends Application {
     private SequentialTransition parallelTransition;
     
 
-   @Override public void start(Stage stage) {
+   @Override 
+   public void start(Stage stage) {
         stage.setTitle("Transitions and Timeline Animation");
         final Scene scene = new Scene(new Group(), 600, 450);
         scene.setFill(Color.WHITE);
         
         final Rectangle rectBasicTimeline = new Rectangle(100, 50, 100, 50);
-        rectBasicTimeline.setFill(Color.BROWN);
+        rectBasicTimeline.setFill(Color.BLACK);
         
         final Rectangle rectFade = new Rectangle(10, 150, 100, 100);
-        rectFade.setArcHeight(20);
+        rectFade.setArcHeight(20);	
         rectFade.setArcWidth(20);
         rectFade.setFill(Color.RED);
         
@@ -95,7 +96,7 @@ public class Animation extends Application {
         final Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setAutoReverse(true);
-        final KeyValue kv = new KeyValue(rectBasicTimeline.xProperty(), 300, Interpolator.EASE_BOTH);
+        final KeyValue kv = new KeyValue(rectBasicTimeline.yProperty(), 300, Interpolator.EASE_BOTH);
         final KeyFrame kf = new KeyFrame(Duration.millis(500), kv);
         timeline.getKeyFrames().add(kf);
         timeline.play();
