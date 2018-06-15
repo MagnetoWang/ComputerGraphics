@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
-import org.junit.Test;
+
 
 //import junit.framework.TestCase;
 import javafx.application.Application;
@@ -28,7 +28,7 @@ public class TestGraphics extends Application {
 	* 
 	*/
 	
-	@Test
+
 	public void start(Stage stage) {
         VBox box = new VBox();
         final Scene scene = new Scene(box,300, 250);

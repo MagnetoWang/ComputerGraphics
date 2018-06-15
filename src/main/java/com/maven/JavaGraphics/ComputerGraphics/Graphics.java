@@ -11,7 +11,7 @@ import java.util.Scanner;
 import javax.net.ssl.SSLException;
 import javax.swing.plaf.synth.SynthScrollBarUI;
 
-import org.junit.Test;
+
 import org.omg.CORBA.RepositoryIdHelper;
 
 import javafx.application.Application;
