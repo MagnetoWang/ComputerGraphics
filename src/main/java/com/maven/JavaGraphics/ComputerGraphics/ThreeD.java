@@ -32,17 +32,17 @@ import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
+/** 
+*
+* @ClassName : ThreeD.java
+* @author : Magneto_Wang
+* @date  2018年5月15日 下午1:33:04
+* @Description  TODO
+* 
+*/
 public class ThreeD extends Application{
 
-	/** 
-	*
-	* @ClassName : ThreeD.java
-	* @author : Magneto_Wang
-	* @date  2018年5月15日 下午1:33:04
-	* @Description  TODO
-	* 
-	*/
+
 	RotateOrder axisOrder=RotateOrder.XYZ;
 	final Group root = new Group();
 	final Xform world = new Xform();

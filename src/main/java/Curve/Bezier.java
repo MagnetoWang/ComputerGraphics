@@ -24,6 +24,7 @@ public class Bezier extends Application{
     public Group root = new Group();
 	public Canvas canvas = new Canvas(800, 600);
 	GraphicsContext gc = canvas.getGraphicsContext2D();
+	
 	public Scene scene;
 	
 	//绘画启动函数
@@ -33,11 +34,11 @@ public class Bezier extends Application{
     }
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		primaryStage.setTitle("B-spline");
+		
 		root.getChildren().add(canvas);
 		primaryStage.setScene(new Scene(root));
 		
-		DrawBSpline(90,primaryStage);
+		DrawBezier(210,primaryStage);
 
 
 		primaryStage.show();	
@@ -51,6 +52,64 @@ public class Bezier extends Application{
 	 * @param primaryStage
 	 */
 	public void BezierAndBSimple(Stage primaryStage){
+		
+	}
+	/***
+	 * 
+	 * @suggestion 多看看wik上面的定义
+	 * @param points
+	 * @param primaryStage
+	 * @ReferencesWebsite https://en.wikipedia.org/wiki/B%C3%A9zier_curve
+	 */
+	public void DrawBezier(int points,Stage primaryStage){
+		primaryStage.setTitle("Bezier");
+		double deltaT =1.0/points;
+		double[][] FourPoint ={{0,0,0},
+				   {1,1,1},
+				   {2,-1,-1},
+				   {3,0,0}
+				   };
+		RealMatrix Points = MatrixUtils.createRealMatrix(FourPoint);
+		double t=0;
+		double radius=5;
+		for(int i=0;i<=points;i++){
+			t=i*deltaT;
+
+			double[][] BasicFuntion ={{(1-t)*(1-t)*(1-t),
+										3*(1-t)*(1-t)*t,
+										3*(1-t)*t*t,
+										t*t*t}};
+			RealMatrix basicFuntion = MatrixUtils.createRealMatrix(BasicFuntion);
+			RealMatrix result = basicFuntion.multiply(
+					Points);
+			
+			Double T=new Double(t);
+			if(T.equals(0d)){
+				System.out.println(T);
+				System.out.println(result);
+			}
+			
+			if(Math.abs((t-1/3d))<=0.000001){
+				System.out.println(T);
+				System.out.println(result);
+			}
+			if(Math.abs((t-2/3d))<=0.000001){
+				System.out.println(T);
+				System.out.println(result);
+			}
+			if(T.equals(1d)){
+				System.out.println(T);
+				System.out.println(result);
+			}
+			result=result.scalarMultiply(300).scalarAdd(100);
+			double[][] resultData=result.getData();
+
+			DrawPoint(resultData[0][0],
+					  resultData[0][1]+200,
+					  resultData[0][2],
+					  radius);
+		}
+
 		
 	}
 	/***
