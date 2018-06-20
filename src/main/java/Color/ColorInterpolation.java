@@ -1,6 +1,9 @@
 package Color;
 
 import java.awt.Paint;
+import java.util.Scanner;
+
+import javax.swing.RootPaneContainer;
 
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -22,13 +25,18 @@ public class ColorInterpolation extends Application {
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
+	static{
+
+		
+	}
 	
     public Group root = new Group();
-	public Canvas canvas = new Canvas(800, 600);
-	GraphicsContext gc = canvas.getGraphicsContext2D();
+	public Canvas canvas ;// new Canvas(800, 600);
+	GraphicsContext gc ;//= canvas.getGraphicsContext2D();
 	public Scene scene=new Scene(root);
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+
 		root.getChildren().add(canvas);
 		primaryStage.setScene(scene);
 		DrawColorLine(primaryStage);
