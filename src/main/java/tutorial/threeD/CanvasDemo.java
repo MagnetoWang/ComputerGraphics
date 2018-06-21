@@ -1,3 +1,5 @@
+package tutorial.threeD;
+
 import com.sun.j3d.utils.universe.SimpleUniverse;
 
 import com.sun.j3d.utils.geometry.ColorCube;

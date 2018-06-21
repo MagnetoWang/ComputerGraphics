@@ -26,12 +26,12 @@ public class Square {
 	public Canvas canvas ;// new Canvas(800, 600);
 	GraphicsContext gc ;//= canvas.getGraphicsContext2D();
 	public Scene scene=new Scene(root);
-	@Override
+	
 	public void start(Stage primaryStage) throws Exception {
 
 		root.getChildren().add(canvas);
 		primaryStage.setScene(scene);
-		DrawColorLine(primaryStage);
+		
 	}
 
 }

@@ -1,3 +1,5 @@
+package tutorial.threeD;
+
 import java.applet.Applet;
 import java.awt.*;
 import java.awt.event.*;
@@ -8,7 +10,8 @@ import com.sun.j3d.utils.applet.MainFrame;
 import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
 import com.sun.j3d.utils.geometry.*;
 import com.sun.j3d.utils.image.TextureLoader;
-import com.sun.j3d.utils.pickfast.PickCanvas;
+
+import com.sun.j3d.utils.picking.PickCanvas;
 import com.sun.j3d.utils.universe.*;
 
 public class DrawingExample extends Applet implements MouseListener, MouseMotionListener {
@@ -172,7 +175,7 @@ public class DrawingExample extends Applet implements MouseListener, MouseMotion
 		}
     public void changeTexture(Texture texture, BufferedImage image, Shape3D shape) {
     	loader = new TextureLoader(image, "RGB",
-				TextureLoader.ALLOW_NON_POWER_OF_TWO);
+				TextureLoader.GENERATE_MIPMAP);
     	texture = loader.getTexture();
 		texture.setBoundaryModeS(Texture.CLAMP_TO_BOUNDARY);
 		texture.setBoundaryModeT(Texture.CLAMP_TO_BOUNDARY);

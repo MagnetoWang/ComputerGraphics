@@ -1,3 +1,6 @@
+package tutorial.threeD;
+
+
 import com.sun.j3d.utils.picking.*;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;

@@ -1,3 +1,5 @@
+package tutorial.threeD;
+
 import com.sun.j3d.utils.geometry.*;
 
 import com.sun.j3d.utils.universe.*;
