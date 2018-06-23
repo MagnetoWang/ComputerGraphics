@@ -1,7 +1,0 @@
-https://stackoverflow.com/questions/37225197/3d-surface-javafx
-http://www.java3d.org/miceandmen.html
-https://stackoverflow.com/questions/30234453/java3d-sphere-orbit
-http://www.cs.stir.ac.uk/courses/ITNP3B/Java3D/demos/
-https://github.com/chrfra/Java3D-examples/blob/master/src/classes/org/jdesktop/j3d/examples/dot3/Dot3Demo.java  
-https://webserver2.tecgraf.puc-rio.br/~ismael/Cursos/Cidade_CG/labs/Java3D/Java3D_onlinebook_selman/Htmls/3DJava_Ch03.htm
-http://univerx.sourceforge.net/
