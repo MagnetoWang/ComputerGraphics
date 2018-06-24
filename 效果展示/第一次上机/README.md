@@ -16,9 +16,9 @@
 
 #### 一．简单图元的绘制
 
-![BasicShapes](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第一次上机\BasicShapes.png)
+![BasicShapes](https://github.com/MagnetoWang/ComputerGraphics/blob/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA/%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%8A%E6%9C%BA/BasicShapes.png)
 
-![Paths](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第一次上机\Paths.png)
+![Paths](https://github.com/MagnetoWang/ComputerGraphics/blob/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA/%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%8A%E6%9C%BA/Paths.png)
 
 ####　二．算法模拟题
 
@@ -142,6 +142,6 @@ public void DDA_LINE_MoreThanOne(Point2D Begin,Point2D End){
 	}
 ```
 
-![DDA](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第一次上机\DDA.png)
+![DDA](https://github.com/MagnetoWang/ComputerGraphics/blob/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA/%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%8A%E6%9C%BA/DDA.png)
 
-![DDA1](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第一次上机\DDA1.png)
+![DDA1](https://github.com/MagnetoWang/ComputerGraphics/blob/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA/%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%8A%E6%9C%BA/DDA1.png)
