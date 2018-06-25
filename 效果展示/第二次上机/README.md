@@ -59,26 +59,26 @@
 
 
 
-![图像 9](https://github.com/MagnetoWang/ComputerGraphics/blob/master/效果展示/第二次上机/图像 9.png)
+![图像 9](https://github.com/MagnetoWang/ComputerGraphics/blob/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA/%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%8A%E6%9C%BA/%E5%9B%BE%E5%83%8F%209.png)
 
 
 
 
 
-![图像 10](https://github.com/MagnetoWang/ComputerGraphics/tree/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA/%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%8A%E6%9C%BA/图像 10.png)
+![图像 10](https://github.com/MagnetoWang/ComputerGraphics/blob/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA/%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%8A%E6%9C%BA/%E5%9B%BE%E5%83%8F%2010.png)
 
 
 
 
 
-![图像 11](https://github.com/MagnetoWang/ComputerGraphics/blob/master/效果展示/第二次上机/图像 11.png)
+![图像 11](https://github.com/MagnetoWang/ComputerGraphics/blob/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA/%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%8A%E6%9C%BA/%E5%9B%BE%E5%83%8F%2011.png)
 
 
 
 
 
-![图像 12](https://github.com/MagnetoWang/ComputerGraphics/blob/master/效果展示/第二次上机/图像 12.png)
+![图像 12](https://github.com/MagnetoWang/ComputerGraphics/blob/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA/%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%8A%E6%9C%BA/%E5%9B%BE%E5%83%8F%2012.png)
 
 
 
-![图像 13](https://github.com/MagnetoWang/ComputerGraphics/blob/master/效果展示/第二次上机/图像 13.png)
+![图像 13](https://github.com/MagnetoWang/ComputerGraphics/blob/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA/%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%8A%E6%9C%BA/%E5%9B%BE%E5%83%8F%2013.png)
