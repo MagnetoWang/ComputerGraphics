@@ -17,6 +17,7 @@ import com.maven.JavaGraphics.ComputerGraphics.Xform;
 import com.maven.JavaGraphics.ComputerGraphics.Xform.RotateOrder;
 
 import javafx.animation.Interpolator;
+import javafx.animation.PathTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
@@ -38,7 +39,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.CubicCurveTo;
 import javafx.scene.shape.Cylinder;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 import javafx.scene.shape.RectangleBuilder;
 import javafx.scene.shape.Sphere;
 import javafx.scene.text.Font;
@@ -334,16 +339,83 @@ public class solor extends Application {
 		
 		
 		
+		
+		
+		
 		//设置相机
 		buildCamera();
 		//设置坐标轴
 		buildAxes();
 		//建立初始目标对象
-		buildEarth();
-		buildMoon();
-		buildSolor();
-
+		Sphere earth=buildEarth();
+		Sphere moon=buildMoon();
+		Sphere sun=buildSolor();
 		
+//		TranslateTransition translateTransition =
+//	            new TranslateTransition(Duration.millis(2000), sun);
+//	        translateTransition.setFromX(50);
+//	        translateTransition.setToX(375);
+//	        translateTransition.setCycleCount(1);
+//	        translateTransition.setAutoReverse(true);
+
+	        
+	        RotateTransition rotateTransition = 
+	                new RotateTransition(Duration.millis(2000), sun);
+	            rotateTransition.setByAngle(180f);
+	            rotateTransition.setCycleCount(4);
+	            rotateTransition.setAutoReverse(true);
+	            
+	            
+	        SequentialTransition sequentialTransition = new SequentialTransition();
+	        sequentialTransition.getChildren().addAll(
+	                
+//	                translateTransition,
+	                rotateTransition);
+	        sequentialTransition.setCycleCount(Timeline.INDEFINITE);
+	        sequentialTransition.setAutoReverse(true);
+	        sequentialTransition.play();
+	        
+	        double centerX=0;
+	        double centerY=0;
+	        double radius=60;
+	        final Circle pointPath = new Circle (10);
+//	        centerY=-centerY;
+	        Circle circlePath = new Circle(centerX,centerY,1);
+
+	        pointPath.setFill(Color.ORANGE);
+//	        circlePath.setStroke(Color.BLUE);
+	        circlePath.setFill(Color.BLUE);
+	        
+	        Path path = new Path();
+	        path.getElements().add(new MoveTo(centerX,centerY-radius));
+	        path.getElements().add(new CubicCurveTo(centerX+(radius)/2, centerY-radius
+	        										, centerX+radius, centerY-(radius/2)
+	        										, centerX+radius, centerY));
+	        path.getElements().add(new CubicCurveTo(centerX+(radius), centerY+(radius/2)
+													, centerX+(radius/2), centerY+radius
+													, centerX, centerY+radius));
+	        path.getElements().add(new MoveTo(centerX, centerY+radius));
+	        
+	        path.getElements().add(new CubicCurveTo(centerX-(radius)/2, centerY+radius
+													, centerX-radius, centerY+(radius/2)
+													, centerX-radius, centerY));
+	        path.getElements().add(new CubicCurveTo(centerX-radius, centerY-(radius/2)
+													, centerX-(radius/2), centerY-(radius)
+													, centerX, centerY-radius));
+	        path.setFill(Color.WHITE);
+	        root.getChildren().add(path);
+	        root.getChildren().addAll(pointPath,circlePath);
+	        
+	        PathTransition pathTransition = new PathTransition();
+	        pathTransition.setDuration(Duration.millis(4000));
+	        pathTransition.setPath(path);
+	        pathTransition.setNode(earth);
+	        pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+	        pathTransition.setCycleCount(Timeline.INDEFINITE);
+	        pathTransition.setAutoReverse(true);
+	        pathTransition.play();
+	        
+	        
 		handleKey(scene,world);
 		
 		world.getChildren().addAll(objectGroup);
@@ -512,30 +584,42 @@ public class solor extends Application {
 		objectGroup.getChildren().add(OriginalObject);
     	objectGroup.getChildren().add(ObjectTwo);
     	objectGroup.setVisible(true);
-
 	}
-	public void buildEarth(){
+	public Sphere buildEarth(){
+		final PhongMaterial Material = new PhongMaterial(Color.BLUE);
 		Sphere earth=new Sphere(10);
+		earth.setMaterial(Material);
 		Xform earth_form=new Xform();
 		earth_form.getChildren().add(earth);
-		earth_form.setTranslate(60, 60, 60);
+		earth_form.setTranslate(60, 60, 60 );
 		objectGroup.getChildren().add(earth_form);
 		objectGroup.setVisible(true);
-		
+		return earth;
 	}
-	public void buildMoon(){
+	public Sphere buildMoon(){
+		final PhongMaterial Material = new PhongMaterial(Color.WHEAT);
+
 		Sphere moon=new Sphere(1);
+		moon.setMaterial(Material);
 		Xform moon_form=new Xform();
+		moon_form.setTranslate(70, 70, 70);
 		moon_form.getChildren().add(moon);
 		objectGroup.getChildren().add(moon_form);
 		objectGroup.setVisible(true);
+		return moon;
 	}
-	public void buildSolor(){
+	public Sphere buildSolor(){
 		Sphere sun=new Sphere(50);
+		final PhongMaterial Material = new PhongMaterial(Color.RED);
+
+		sun.setMaterial(Material);
 		Xform sun_form=new Xform();
+		
 		sun_form.getChildren().add(sun);
+		
 		objectGroup.getChildren().add(sun_form);
 		objectGroup.setVisible(true);
+		return sun;
 	}
 
 }

@@ -83,7 +83,7 @@ public class Animation extends Application {
         Rectangle rectSeq = new Rectangle(25,25,50, 50);
         rectSeq.setArcHeight(15);
         rectSeq.setArcWidth(15);
-        rectSeq.setFill(Color.DARKBLUE);
+        rectSeq.setFill(Color.BLUEVIOLET);
         rectSeq.setTranslateX(50);
         rectSeq.setTranslateY(50);
         
