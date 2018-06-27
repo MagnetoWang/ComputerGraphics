@@ -16,13 +16,7 @@ import javax.xml.soap.SOAPException;
 import com.maven.JavaGraphics.ComputerGraphics.Xform;
 import com.maven.JavaGraphics.ComputerGraphics.Xform.RotateOrder;
 
-import javafx.animation.Interpolator;
-import javafx.animation.PathTransition;
-import javafx.animation.RotateTransition;
-import javafx.animation.SequentialTransition;
-import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
-import javafx.animation.TranslateTransitionBuilder;
+import javafx.animation.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.VPos;
@@ -32,25 +26,20 @@ import javafx.scene.Node;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.SceneBuilder;
+import javafx.scene.effect.Bloom;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageViewBuilder;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
-import javafx.scene.shape.Box;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.CubicCurveTo;
-import javafx.scene.shape.Cylinder;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
-import javafx.scene.shape.RectangleBuilder;
-import javafx.scene.shape.Sphere;
+import javafx.scene.shape.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextBuilder;
+import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -108,10 +97,7 @@ public class solor extends Application {
 	final PhongMaterial blueMaterial = new PhongMaterial(Color.BLUE);
 	
 	
-    private void buildScene() {
-        System.out.println("buildScene");
-        root.getChildren().add(world);
-    }
+
     private void buildCamera() {
     	root.getChildren().add(cameraXform);
     	cameraXform.getChildren().add(cameraXform2);
@@ -295,35 +281,19 @@ public class solor extends Application {
             }
         });
     }
-    public void buildObject(){
-    	
-//        	final PhongMaterial redMaterial = new PhongMaterial();
-//        	redMaterial.setDiffuseColor(Color.DARKRED);
-        	redMaterial.setSpecularColor(Color.RED);
-        	Box Object_One = new Box(10, 10	, 10);
-        	Object_One.setMaterial(redMaterial);
-        	objectGroup.getChildren().add(Object_One);
-//        	objectGroup.setScale(2);
-//        	objectGroup.setTranslate(10, 10);
-//        	objectGroup.setRotate(60);
-        	
-        	objectGroup.setVisible(true);
-//        	world.getChildren().addAll(objectGroup);
-    }
+
     public Xform buildBox(double width, double height, double depth,PhongMaterial Material){
     	Xform ObjectBox=new Xform(axisOrder);
 //    	Material.setSpecularColor(Color.RED);
     	Box Object_One = new Box(width, height	, depth);
     	Object_One.setMaterial(Material);
-    	
+
     	ObjectBox.getChildren().add(Object_One);
     	ObjectBox.setVisible(true);
     	world.getChildren().addAll(ObjectBox);
     	return ObjectBox;
     }
-    public void ObjectCoordinate(Xform Object ,double x,double y,double z){
-    	Object.setTranslate(x, y, z);
-    }
+
     public Translate translate3D=new Translate(10, 10, 10);
 
 	public static void main(String[] args) {
@@ -574,16 +544,89 @@ public class solor extends Application {
     	in.close();
 
 	}
-	public void solveFirstQuestion(){
 
-		Xform OriginalObject =buildBox(10, 10	, 10, redMaterial); //=objectGroup.clone();
-//		world.getChildren().add(OriginalObject);
-		Xform ObjectTwo = buildBox(10, 10, 10, redMaterial);
-		ObjectTwo.setTranslate(10.0,20.0,10.0);
-		ObjectTwo.setScale(2.0,1.0,0.5);
-		objectGroup.getChildren().add(OriginalObject);
-    	objectGroup.getChildren().add(ObjectTwo);
-    	objectGroup.setVisible(true);
+
+	private  Group solorGroup = new Group();
+	private static final Duration DURATION = Duration.seconds(4);
+	private static final Color COLOR = Color.AQUA;
+	private static final double WIDTH = 3;
+	private final Group group = new Group();
+	private final Rotate rx = new Rotate(0, Rotate.X_AXIS);
+	private final Rotate ry = new Rotate(0, Rotate.Y_AXIS);
+	private final Rotate rz = new Rotate(0, Rotate.Z_AXIS);
+	private final Box xAxis;
+	private final Box yAxis;
+	private final Box zAxis;
+	private final Shape circle;
+	private final Shape arrow;
+	private final Animation animation;
+	private solor(double size) {
+		xAxis = createBox(size, WIDTH, WIDTH);
+		yAxis = createBox(WIDTH, size, WIDTH);
+		zAxis = createBox(WIDTH, WIDTH, size);
+		circle = createCircle(size);
+		arrow = createShape();
+		animation = new ParallelTransition(
+				createTransition(circle, arrow),
+				createTimeline(size / 2));
+	}
+
+	private static  solor create(double size){
+		solor solorSystem=new solor(size);
+
+		solorSystem.solorGroup.getChildren().addAll(solorSystem.buildEarth()
+				,solorSystem.buildMoon(),
+				solorSystem.buildSolor());
+		solorSystem.solorGroup.getTransforms().addAll(solorSystem.rz,
+				solorSystem.ry,
+				solorSystem.rx);
+		return solorSystem;
+	}
+	private Circle createCircle(double size) {
+		Circle c = new Circle(size / 4);
+		c.setFill(Color.TRANSPARENT);
+		c.setStroke(COLOR);
+		return c;
+	}
+
+	private Box createBox(double w, double h, double d) {
+		Box b = new Box(w, h, d);
+		b.setMaterial(new PhongMaterial(COLOR));
+		return b;
+	}
+
+	private Shape createShape() {
+		Shape s = new Polygon(0, 0, -10, -10, 10, 0, -10, 10);
+		s.setStrokeWidth(WIDTH);
+		s.setStrokeLineCap(StrokeLineCap.ROUND);
+		s.setStroke(COLOR);
+		s.setEffect(new Bloom());
+		return s;
+	}
+
+	private Transition createTransition(Shape path, Shape node) {
+		PathTransition t = new PathTransition(DURATION, path, node);
+		t.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+		t.setCycleCount(Timeline.INDEFINITE);
+		t.setInterpolator(Interpolator.LINEAR);
+		return t;
+	}
+
+	private Timeline createTimeline(double size) {
+		Timeline t = new Timeline();
+		t.setCycleCount(Timeline.INDEFINITE);
+		t.setAutoReverse(true);
+		KeyValue keyX = new KeyValue(group.translateXProperty(), size);
+		KeyValue keyY = new KeyValue(group.translateYProperty(), size);
+		KeyValue keyZ = new KeyValue(group.translateZProperty(), -size);
+		KeyFrame keyFrame = new KeyFrame(DURATION.divide(2), keyX, keyY, keyZ);
+		t.getKeyFrames().add(keyFrame);
+		return t;
+	}
+
+	private void buildScene() {
+		System.out.println("buildScene");
+		root.getChildren().add(world);
 	}
 	public Sphere buildEarth(){
 		final PhongMaterial Material = new PhongMaterial(Color.BLUE);
