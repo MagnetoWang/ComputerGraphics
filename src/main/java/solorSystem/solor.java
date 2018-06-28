@@ -300,18 +300,14 @@ public class solor extends Application {
         System.setProperty("prism.dirtyopts", "false");
         Application.launch(args);
 	}
-	
+
+	private PathTransition pathTransitionEllipse;
+	private PathTransition pathTransitionCircle;
 	public void start(Stage primaryStage) {
 		Scene scene = new Scene(root, 1024, 768, true);
 		scene.setFill(Color.GREY);
 		handleKeyboard(scene, world);
 		handleMouse(scene, world);
-		
-		
-		
-		
-		
-		
 		//设置相机
 		buildCamera();
 		//设置坐标轴
@@ -320,7 +316,14 @@ public class solor extends Application {
 		Sphere earth=buildEarth();
 		Sphere moon=buildMoon();
 		Sphere sun=buildSolor();
-		
+//		MoveCircle(earth);
+
+		CircleEarth(earth,moon);
+//		CircleSun(sun,earth,moon);
+		animateSphere1(moon);
+
+
+
 //		TranslateTransition translateTransition =
 //	            new TranslateTransition(Duration.millis(2000), sun);
 //	        translateTransition.setFromX(50);
@@ -328,72 +331,220 @@ public class solor extends Application {
 //	        translateTransition.setCycleCount(1);
 //	        translateTransition.setAutoReverse(true);
 
+//
+//	        RotateTransition rotateTransition =
+//	                new RotateTransition(Duration.millis(2000), sun);
+//	            rotateTransition.setByAngle(180f);
+//	            rotateTransition.setCycleCount(4);
+//	            rotateTransition.setAutoReverse(true);
+//
+//
+//	        SequentialTransition sequentialTransition = new SequentialTransition();
+//	        sequentialTransition.getChildren().addAll(
+//
+////	                translateTransition,
+//	                rotateTransition);
+//	        sequentialTransition.setCycleCount(Timeline.INDEFINITE);
+//	        sequentialTransition.setAutoReverse(true);
+//	        sequentialTransition.play();
 	        
-	        RotateTransition rotateTransition = 
-	                new RotateTransition(Duration.millis(2000), sun);
-	            rotateTransition.setByAngle(180f);
-	            rotateTransition.setCycleCount(4);
-	            rotateTransition.setAutoReverse(true);
-	            
-	            
-	        SequentialTransition sequentialTransition = new SequentialTransition();
-	        sequentialTransition.getChildren().addAll(
-	                
-//	                translateTransition,
-	                rotateTransition);
-	        sequentialTransition.setCycleCount(Timeline.INDEFINITE);
-	        sequentialTransition.setAutoReverse(true);
-	        sequentialTransition.play();
-	        
-	        double centerX=0;
-	        double centerY=0;
-	        double radius=60;
-	        final Circle pointPath = new Circle (10);
+//	        double centerX=0;
+//	        double centerY=0;
+//	        double radius=60;
+//	        final Circle pointPath = new Circle (10);
 //	        centerY=-centerY;
-	        Circle circlePath = new Circle(centerX,centerY,1);
+//	        Circle circlePath = new Circle(centerX,centerY,1);
 
-	        pointPath.setFill(Color.ORANGE);
-//	        circlePath.setStroke(Color.BLUE);
-	        circlePath.setFill(Color.BLUE);
-	        
-	        Path path = new Path();
-	        path.getElements().add(new MoveTo(centerX,centerY-radius));
-	        path.getElements().add(new CubicCurveTo(centerX+(radius)/2, centerY-radius
-	        										, centerX+radius, centerY-(radius/2)
-	        										, centerX+radius, centerY));
-	        path.getElements().add(new CubicCurveTo(centerX+(radius), centerY+(radius/2)
-													, centerX+(radius/2), centerY+radius
-													, centerX, centerY+radius));
-	        path.getElements().add(new MoveTo(centerX, centerY+radius));
-	        
-	        path.getElements().add(new CubicCurveTo(centerX-(radius)/2, centerY+radius
-													, centerX-radius, centerY+(radius/2)
-													, centerX-radius, centerY));
-	        path.getElements().add(new CubicCurveTo(centerX-radius, centerY-(radius/2)
-													, centerX-(radius/2), centerY-(radius)
-													, centerX, centerY-radius));
-	        path.setFill(Color.WHITE);
-	        root.getChildren().add(path);
-	        root.getChildren().addAll(pointPath,circlePath);
-	        
-	        PathTransition pathTransition = new PathTransition();
-	        pathTransition.setDuration(Duration.millis(4000));
-	        pathTransition.setPath(path);
-	        pathTransition.setNode(earth);
-	        pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-	        pathTransition.setCycleCount(Timeline.INDEFINITE);
-	        pathTransition.setAutoReverse(true);
-	        pathTransition.play();
+//	        pointPath.setFill(Color.ORANGE);
+////	        circlePath.setStroke(Color.BLUE);
+//	        circlePath.setFill(Color.BLUE);
+//
+//	        Path path = new Path();
+//	        path.getElements().add(new MoveTo(centerX,centerY-radius));
+//	        path.getElements().add(new CubicCurveTo(centerX+(radius)/2, centerY-radius
+//	        										, centerX+radius, centerY-(radius/2)
+//	        										, centerX+radius, centerY));
+//	        path.getElements().add(new CubicCurveTo(centerX+(radius), centerY+(radius/2)
+//													, centerX+(radius/2), centerY+radius
+//													, centerX, centerY+radius));
+//	        path.getElements().add(new MoveTo(centerX, centerY+radius));
+//
+//	        path.getElements().add(new CubicCurveTo(centerX-(radius)/2, centerY+radius
+//													, centerX-radius, centerY+(radius/2)
+//													, centerX-radius, centerY));
+//	        path.getElements().add(new CubicCurveTo(centerX-radius, centerY-(radius/2)
+//													, centerX-(radius/2), centerY-(radius)
+//													, centerX, centerY-radius));
+//
+//	        path.setFill(Color.WHITE);
+//	        root.getChildren().add(path);
+//	        root.getChildren().addAll(pointPath,circlePath);
+//
+//	        PathTransition pathTransition = new PathTransition();
+//	        pathTransition.setDuration(Duration.millis(4000));
+//	        pathTransition.setPath(path);
+//	        pathTransition.setNode(earth);
+//	        pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+//	        pathTransition.setCycleCount(Timeline.INDEFINITE);
+//	        pathTransition.setAutoReverse(true);
+//	        pathTransition.play();
 	        
 	        
 		handleKey(scene,world);
 		
-		world.getChildren().addAll(objectGroup);
+		world.getChildren().addAll(objectGroup,earth_moon,sun_earth_moon	);
 		root.getChildren().addAll(world);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		scene.setCamera(camera);
     }
+    public static Group earth_moon=new Group();
+	public static Group sun_earth_moon=new Group();
+    public void CircleEarth(Sphere earth,Sphere moon){
+		earth_moon.getChildren().addAll(earth,moon);
+	}
+	public void CircleSun(Sphere sun,Sphere earth,Sphere moon){
+		sun_earth_moon.getChildren().addAll(sun,earth_moon);
+	}
+    public void MoveCircle(Sphere node){
+		Path path2 = createEllipsePath(0, 0, 50, 50, 0);
+		root.getChildren().add(path2);
+
+		pathTransitionCircle = PathTransitionBuilder.create()
+				.duration(Duration.seconds(2))
+				.path(path2)
+				.node(node)
+				.orientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT)
+				.cycleCount(Timeline.INDEFINITE)
+				.autoReverse(false)
+				.build();
+		pathTransitionCircle.play();
+	}
+	public void MoveCircle1(Sphere node){
+		Shape arrow=createShape();
+		Shape circle=createCircle(10);
+		root.getChildren().addAll(node,circle);
+		Animation animation = new ParallelTransition(
+				createTransition(circle, arrow),
+				createTimeline(10 / 2));
+		animation.play();
+
+	}
+	//https://stackoverflow.com/questions/40721341/javafx-8-3d-animation
+	private static void animateSphere(Sphere sphere) {
+		Rotate rot = new Rotate();
+		Translate radiusTranslate = new Translate(50, 0, 0);
+		Translate zMovement = new Translate();
+
+		sphere.getTransforms().setAll(zMovement, rot, radiusTranslate);
+		Timeline tl = new Timeline(
+				new KeyFrame(Duration.ZERO,
+						new KeyValue(zMovement.zProperty(), 0d),
+						new KeyValue(rot.angleProperty(), 0d)),
+				new KeyFrame(Duration.seconds(4),
+						new KeyValue(zMovement.zProperty(), 900d, Interpolator.LINEAR),
+						new KeyValue(rot.angleProperty(), 720, Interpolator.LINEAR))
+		);
+		tl.setCycleCount(Timeline.INDEFINITE);
+		tl.play();
+	}
+	private static void animateSphere1(Sphere sphere){
+		CylinderCoordinateAdapter adapter = new CylinderCoordinateAdapter(
+			earth_moon.translateXProperty(),
+			earth_moon.translateYProperty(),
+			earth_moon.translateZProperty());
+
+		adapter.setRadius(100);
+		sphere.setTranslateX(20);
+
+
+		CylinderCoordinateAdapter mooon_ada=new CylinderCoordinateAdapter(
+				sphere.translateXProperty(),
+				sphere.translateYProperty(),
+				sphere.translateZProperty());
+
+		mooon_ada.setRadius(20);
+		Timeline t2 = new Timeline(
+
+				new KeyFrame(Duration.seconds(4),
+						new KeyValue(mooon_ada.hProperty(), 0d, Interpolator.LINEAR),
+						new KeyValue(mooon_ada.thetaProperty(), Math.PI *6, Interpolator.LINEAR))
+
+		);
+
+
+
+		Timeline tl = new Timeline(
+//				new KeyFrame(Duration.seconds(10),
+//						new KeyValue(adapter.hProperty(), 0d),
+//						new KeyValue(adapter.thetaProperty(), 0d))
+				new KeyFrame(Duration.seconds(4),
+						new KeyValue(earth_moon.translateXProperty(), 0d, Interpolator.LINEAR),
+						new KeyValue(earth_moon.translateYProperty(), Math.PI *6, Interpolator.LINEAR))
+//				new KeyValue(adapter.axisProperty(),20, Interpolator.LINEAR))
+//				Interpolator.SPLINE(0.5,0.5,0.5,0.5)
+		);
+
+//		System.out.println(tl.toString());
+		t2.setCycleCount(Timeline.INDEFINITE);
+		t2.play();
+		tl.setCycleCount(Timeline.INDEFINITE);
+		tl.play();
+	}
+	private Shape createShape() {
+		Shape s = new Polygon(0, 0, -10, -10, 10, 0, -10, 10);
+		s.setStrokeWidth(3);
+		s.setStrokeLineCap(StrokeLineCap.ROUND);
+		s.setStroke(Color.RED);
+		s.setEffect(new Bloom());
+		return s;
+	}
+	private static final Duration DURATION = Duration.seconds(4);
+	private Transition createTransition(Shape path, Shape node) {
+		PathTransition t = new PathTransition(DURATION, path, node);
+		t.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+		t.setCycleCount(Timeline.INDEFINITE);
+		t.setInterpolator(Interpolator.LINEAR);
+		return t;
+	}
+	private Circle createCircle(double size) {
+		Circle c = new Circle(size / 4);
+		c.setFill(Color.TRANSPARENT);
+		c.setStroke(Color.ORANGE);
+		return c;
+	}
+
+	private Timeline createTimeline(double size) {
+		Timeline t = new Timeline();
+		t.setCycleCount(Timeline.INDEFINITE);
+		t.setAutoReverse(true);
+		KeyValue keyX = new KeyValue(root.translateXProperty(), size);
+		KeyValue keyY = new KeyValue(root.translateYProperty(), size);
+		KeyValue keyZ = new KeyValue(root.translateZProperty(), -size);
+		KeyFrame keyFrame = new KeyFrame(DURATION.divide(2), keyX, keyY, keyZ);
+		t.getKeyFrames().add(keyFrame);
+		return t;
+	}
+	private Path createEllipsePath(double centerX, double centerY, double radiusX, double radiusY, double rotate) {
+		ArcTo arcTo = new ArcTo();
+		arcTo.setX(centerX - radiusX + 1); // to simulate a full 360 degree celcius circle.
+		arcTo.setY(centerY - radiusY);
+		arcTo.setSweepFlag(false);
+		arcTo.setLargeArcFlag(true);
+		arcTo.setRadiusX(radiusX);
+		arcTo.setRadiusY(radiusY);
+		arcTo.setXAxisRotation(rotate);
+
+		Path path = PathBuilder.create()
+				.elements(
+						new MoveTo(centerX - radiusX, centerY - radiusY),
+						arcTo,
+						new ClosePath()) // close 1 px gap.
+				.build();
+		path.setStroke(Color.DODGERBLUE);
+		path.getStrokeDashArray().setAll(5d, 5d);
+		return path;
+	}
 	public void KeyEventPaint(){
 		final PhongMaterial Material = new PhongMaterial(Color.BLACK);
 		Xform OriginalObject =buildBox(10, 10, 10, Material);
@@ -546,83 +697,83 @@ public class solor extends Application {
 	}
 
 
-	private  Group solorGroup = new Group();
-	private static final Duration DURATION = Duration.seconds(4);
-	private static final Color COLOR = Color.AQUA;
-	private static final double WIDTH = 3;
-	private final Group group = new Group();
-	private final Rotate rx = new Rotate(0, Rotate.X_AXIS);
-	private final Rotate ry = new Rotate(0, Rotate.Y_AXIS);
-	private final Rotate rz = new Rotate(0, Rotate.Z_AXIS);
-	private final Box xAxis;
-	private final Box yAxis;
-	private final Box zAxis;
-	private final Shape circle;
-	private final Shape arrow;
-	private final Animation animation;
-	private solor(double size) {
-		xAxis = createBox(size, WIDTH, WIDTH);
-		yAxis = createBox(WIDTH, size, WIDTH);
-		zAxis = createBox(WIDTH, WIDTH, size);
-		circle = createCircle(size);
-		arrow = createShape();
-		animation = new ParallelTransition(
-				createTransition(circle, arrow),
-				createTimeline(size / 2));
-	}
+//	private  Group solorGroup = new Group();
+//	private static final Duration DURATION = Duration.seconds(4);
+//	private static final Color COLOR = Color.AQUA;
+//	private static final double WIDTH = 3;
+//	private final Group group = new Group();
+//	private final Rotate rx = new Rotate(0, Rotate.X_AXIS);
+//	private final Rotate ry = new Rotate(0, Rotate.Y_AXIS);
+//	private final Rotate rz = new Rotate(0, Rotate.Z_AXIS);
+//	private final Box xAxis;
+//	private final Box yAxis;
+//	private final Box zAxis;
+//	private final Shape circle;
+//	private final Shape arrow;
+//	private final Animation animation;
+//	private solor(double size) {
+//		xAxis = createBox(size, WIDTH, WIDTH);
+//		yAxis = createBox(WIDTH, size, WIDTH);
+//		zAxis = createBox(WIDTH, WIDTH, size);
+//		circle = createCircle(size);
+//		arrow = createShape();
+//		animation = new ParallelTransition(
+//				createTransition(circle, arrow),
+//				createTimeline(size / 2));
+//	}
 
-	private static  solor create(double size){
-		solor solorSystem=new solor(size);
-
-		solorSystem.solorGroup.getChildren().addAll(solorSystem.buildEarth()
-				,solorSystem.buildMoon(),
-				solorSystem.buildSolor());
-		solorSystem.solorGroup.getTransforms().addAll(solorSystem.rz,
-				solorSystem.ry,
-				solorSystem.rx);
-		return solorSystem;
-	}
-	private Circle createCircle(double size) {
-		Circle c = new Circle(size / 4);
-		c.setFill(Color.TRANSPARENT);
-		c.setStroke(COLOR);
-		return c;
-	}
-
-	private Box createBox(double w, double h, double d) {
-		Box b = new Box(w, h, d);
-		b.setMaterial(new PhongMaterial(COLOR));
-		return b;
-	}
-
-	private Shape createShape() {
-		Shape s = new Polygon(0, 0, -10, -10, 10, 0, -10, 10);
-		s.setStrokeWidth(WIDTH);
-		s.setStrokeLineCap(StrokeLineCap.ROUND);
-		s.setStroke(COLOR);
-		s.setEffect(new Bloom());
-		return s;
-	}
-
-	private Transition createTransition(Shape path, Shape node) {
-		PathTransition t = new PathTransition(DURATION, path, node);
-		t.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-		t.setCycleCount(Timeline.INDEFINITE);
-		t.setInterpolator(Interpolator.LINEAR);
-		return t;
-	}
-
-	private Timeline createTimeline(double size) {
-		Timeline t = new Timeline();
-		t.setCycleCount(Timeline.INDEFINITE);
-		t.setAutoReverse(true);
-		KeyValue keyX = new KeyValue(group.translateXProperty(), size);
-		KeyValue keyY = new KeyValue(group.translateYProperty(), size);
-		KeyValue keyZ = new KeyValue(group.translateZProperty(), -size);
-		KeyFrame keyFrame = new KeyFrame(DURATION.divide(2), keyX, keyY, keyZ);
-		t.getKeyFrames().add(keyFrame);
-		return t;
-	}
+//	private static  solor create(double size){
+//		solor solorSystem=new solor(size);
+//
+//		solorSystem.solorGroup.getChildren().addAll(solorSystem.buildEarth()
+//				,solorSystem.buildMoon(),
+//				solorSystem.buildSolor());
+//		solorSystem.solorGroup.getTransforms().addAll(solorSystem.rz,
+//				solorSystem.ry,
+//				solorSystem.rx);
+//		return solorSystem;
+//	}
+//	private Circle createCircle(double size) {
+//		Circle c = new Circle(size / 4);
+//		c.setFill(Color.TRANSPARENT);
+//		c.setStroke(COLOR);
+//		return c;
+//	}
+//
+//	private Box createBox(double w, double h, double d) {
+//		Box b = new Box(w, h, d);
+//		b.setMaterial(new PhongMaterial(COLOR));
+//		return b;
+//	}
+//
+//	private Shape createShape() {
+//		Shape s = new Polygon(0, 0, -10, -10, 10, 0, -10, 10);
+//		s.setStrokeWidth(WIDTH);
+//		s.setStrokeLineCap(StrokeLineCap.ROUND);
+//		s.setStroke(COLOR);
+//		s.setEffect(new Bloom());
+//		return s;
+//	}
+//
+//	private Transition createTransition(Shape path, Shape node) {
+//		PathTransition t = new PathTransition(DURATION, path, node);
+//		t.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+//		t.setCycleCount(Timeline.INDEFINITE);
+//		t.setInterpolator(Interpolator.LINEAR);
+//		return t;
+//	}
+//
+//	private Timeline createTimeline(double size) {
+//		Timeline t = new Timeline();
+//		t.setCycleCount(Timeline.INDEFINITE);
+//		t.setAutoReverse(true);
+//		KeyValue keyX = new KeyValue(group.translateXProperty(), size);
+//		KeyValue keyY = new KeyValue(group.translateYProperty(), size);
+//		KeyValue keyZ = new KeyValue(group.translateZProperty(), -size);
+//		KeyFrame keyFrame = new KeyFrame(DURATION.divide(2), keyX, keyY, keyZ);
+//		t.getKeyFrames().add(keyFrame);
+//		return t;
+//	}
 
 	private void buildScene() {
 		System.out.println("buildScene");
@@ -634,7 +785,7 @@ public class solor extends Application {
 		earth.setMaterial(Material);
 		Xform earth_form=new Xform();
 		earth_form.getChildren().add(earth);
-		earth_form.setTranslate(60, 60, 60 );
+		earth_form.setTranslate(0, 0, 0 );
 		objectGroup.getChildren().add(earth_form);
 		objectGroup.setVisible(true);
 		return earth;
@@ -642,17 +793,17 @@ public class solor extends Application {
 	public Sphere buildMoon(){
 		final PhongMaterial Material = new PhongMaterial(Color.WHEAT);
 
-		Sphere moon=new Sphere(1);
+		Sphere moon=new Sphere(5);
 		moon.setMaterial(Material);
 		Xform moon_form=new Xform();
-		moon_form.setTranslate(70, 70, 70);
+		moon_form.setTranslate(0, 0, 0);
 		moon_form.getChildren().add(moon);
 		objectGroup.getChildren().add(moon_form);
 		objectGroup.setVisible(true);
 		return moon;
 	}
 	public Sphere buildSolor(){
-		Sphere sun=new Sphere(50);
+		Sphere sun=new Sphere(5);
 		final PhongMaterial Material = new PhongMaterial(Color.RED);
 
 		sun.setMaterial(Material);
