@@ -5,7 +5,29 @@ package solorSystem;
 * @author : Magneto_Wang
 * @date  2018年6月25日 下午11:03:32
 * @Description  模拟太阳公转
-* 
+ * @website https://www.tutorialspoint.com/javafx/javafx_animations.htm
+ * https://3dwarehouse.sketchup.com
+ * 3d模型库
+ * http://www.interactivemesh.org/models/jfx3dimporter.html
+ * 
+ * 
+ *  漫射色
+
+ 漫反射贴图
+
+ 高光贴图
+
+ 高光颜色
+
+ 高光强度
+
+ 凹凸贴图和正常贴图
+
+ 自发光贴图
+ * https://blog.csdn.net/maosijunzi/article/details/43053571
+ *
+* year =  31536000 sec
+day = 86400 sec
 */
 
 
@@ -306,12 +328,13 @@ public class solor extends Application {
 	public void start(Stage primaryStage) {
 		Scene scene = new Scene(root, 1024, 768, true);
 		scene.setFill(Color.GREY);
+		primaryStage.setTitle("地球公转和月球绕地运动");
 		handleKeyboard(scene, world);
 		handleMouse(scene, world);
 		//设置相机
 		buildCamera();
 		//设置坐标轴
-		buildAxes();
+//		buildAxes();
 		//建立初始目标对象
 		Sphere earth=buildEarth();
 		Sphere moon=buildMoon();
@@ -320,7 +343,8 @@ public class solor extends Application {
 
 		CircleEarth(earth,moon);
 //		CircleSun(sun,earth,moon);
-		animateSphere1(moon);
+		animateSphere1(moon,earth);
+		animateSphere(earth_moon);
 
 
 
@@ -448,22 +472,47 @@ public class solor extends Application {
 		tl.setCycleCount(Timeline.INDEFINITE);
 		tl.play();
 	}
-	private static void animateSphere1(Sphere sphere){
+	private static void animateSphere(Group group) {
+		Rotate rot = new Rotate();
+		Translate radiusTranslate = new Translate(100, 50, 0);
+		Translate xMovement = new Translate();
+
+		group.getTransforms().setAll(xMovement, rot, radiusTranslate);
+		Timeline tl = new Timeline(
+				// new KeyFrame(Duration.ZERO,
+				// 		new KeyValue(zMovement.zProperty(), 0d),
+				// 		new KeyValue(rot.angleProperty(), 0d)),
+				new KeyFrame(Duration.seconds(365),
+						new KeyValue(xMovement.yProperty(), 0d, Interpolator.LINEAR),
+						new KeyValue(rot.angleProperty(), 720, Interpolator.LINEAR))
+		);
+		tl.setCycleCount(Timeline.INDEFINITE);
+		tl.play();
+	}
+	private static void animateSphere1(Sphere moon,Sphere earth){
 		CylinderCoordinateAdapter adapter = new CylinderCoordinateAdapter(
 			earth_moon.translateXProperty(),
 			earth_moon.translateYProperty(),
 			earth_moon.translateZProperty());
 
-		adapter.setRadius(100);
-		sphere.setTranslateX(20);
-
-
+		// CylinderCoordinateAdapter earth_Adapter = new CylinderCoordinateAdapter(
+		// 		earth.translateXProperty(),
+		// 		earth.translateYProperty(),
+		// 		earth.translateZProperty());
 		CylinderCoordinateAdapter mooon_ada=new CylinderCoordinateAdapter(
-				sphere.translateXProperty(),
-				sphere.translateYProperty(),
-				sphere.translateZProperty());
+			moon.translateXProperty(),
+			moon.translateYProperty(),
+			moon.translateZProperty());
 
+
+
+		//  earth_Adapter.setRadius(100);
+		adapter.setRadius(0);
+		// moon.setTranslateX(40);
 		mooon_ada.setRadius(20);
+
+
+
 		Timeline t2 = new Timeline(
 
 				new KeyFrame(Duration.seconds(4),
@@ -474,22 +523,22 @@ public class solor extends Application {
 
 
 
-		Timeline tl = new Timeline(
+		// Timeline tl = new Timeline(
 //				new KeyFrame(Duration.seconds(10),
 //						new KeyValue(adapter.hProperty(), 0d),
 //						new KeyValue(adapter.thetaProperty(), 0d))
-				new KeyFrame(Duration.seconds(4),
-						new KeyValue(earth_moon.translateXProperty(), 0d, Interpolator.LINEAR),
-						new KeyValue(earth_moon.translateYProperty(), Math.PI *6, Interpolator.LINEAR))
+				// new KeyFrame(Duration.seconds(4),
+				// 		new KeyValue(earth_Adapter.hProperty(), 100d, Interpolator.LINEAR),
+				// 		new KeyValue(earth_Adapter.thetaProperty(), Math.PI *6, Interpolator.LINEAR))
 //				new KeyValue(adapter.axisProperty(),20, Interpolator.LINEAR))
 //				Interpolator.SPLINE(0.5,0.5,0.5,0.5)
-		);
+//		);
 
 //		System.out.println(tl.toString());
 		t2.setCycleCount(Timeline.INDEFINITE);
 		t2.play();
-		tl.setCycleCount(Timeline.INDEFINITE);
-		tl.play();
+		// tl.setCycleCount(Timeline.INDEFINITE);
+		// tl.play();
 	}
 	private Shape createShape() {
 		Shape s = new Polygon(0, 0, -10, -10, 10, 0, -10, 10);
@@ -780,7 +829,10 @@ public class solor extends Application {
 		root.getChildren().add(world);
 	}
 	public Sphere buildEarth(){
-		final PhongMaterial Material = new PhongMaterial(Color.BLUE);
+		
+		Image earthMap = new Image("/earthmap.bmp");
+		final PhongMaterial Material = new PhongMaterial();
+		Material.setSelfIlluminationMap(earthMap);
 		Sphere earth=new Sphere(10);
 		earth.setMaterial(Material);
 		Xform earth_form=new Xform();
@@ -792,7 +844,8 @@ public class solor extends Application {
 	}
 	public Sphere buildMoon(){
 		final PhongMaterial Material = new PhongMaterial(Color.WHEAT);
-
+		Image moonMap = new Image("/moonmap.bmp");
+		Material.setSelfIlluminationMap(moonMap);
 		Sphere moon=new Sphere(5);
 		moon.setMaterial(Material);
 		Xform moon_form=new Xform();
@@ -803,9 +856,10 @@ public class solor extends Application {
 		return moon;
 	}
 	public Sphere buildSolor(){
-		Sphere sun=new Sphere(5);
+		Sphere sun=new Sphere(50);
+		Image sunMap = new Image("/sunmap.bmp");
 		final PhongMaterial Material = new PhongMaterial(Color.RED);
-
+		Material.setSelfIlluminationMap(sunMap);
 		sun.setMaterial(Material);
 		Xform sun_form=new Xform();
 		

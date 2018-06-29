@@ -11,10 +11,7 @@ package threeD;
 import java.applet.Applet;
 import java.awt.BorderLayout;
 import java.awt.GraphicsConfiguration;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
+
 
 
 import javax.media.j3d.*;
@@ -26,9 +23,6 @@ import com.sun.j3d.loaders.Scene;
 import com.sun.j3d.loaders.objectfile.ObjectFile;
 import com.sun.j3d.utils.applet.MainFrame;
 import com.sun.j3d.utils.behaviors.mouse.*;
-import com.sun.j3d.utils.pickfast.behaviors.PickRotateBehavior;
-import com.sun.j3d.utils.pickfast.behaviors.PickTranslateBehavior;
-import com.sun.j3d.utils.pickfast.behaviors.PickZoomBehavior;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 
 import tutorial.threeD.M3DMax3dsfileLoader;
