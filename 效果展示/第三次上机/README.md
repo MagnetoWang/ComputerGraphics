@@ -1,5 +1,5 @@
 # 计算机图形学
-## 第一次上机作业
+## 第三次上机作业
 #### 编程环境
 
 - 编程语言：java1.8
@@ -34,17 +34,17 @@
 
 
 
-![曲线2-1](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第三次上机\曲线2-1.png)
+![曲线2-1](曲线2-1.png)
 
 
 
-![曲线2-2](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第三次上机\曲线2-2.png)
+![曲线2-2](曲线2-2.png)
 
 
 
 
 
-![曲线4](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第三次上机\曲线4.png)
+![曲线4](曲线4.png)
 
 
 
@@ -53,15 +53,15 @@
 
 这个题目比较简单，写好公式，在代入对应点和点的切向量。期间还尝试了如何画圆效果都还可以
 
-![hermite-code](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第三次上机\hermite-code.png)
+![hermite-code](hermite-code.png)
 
 
 
-![hermite-given-1](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第三次上机\hermite-given-1.png)
+![hermite-given-1](hermite-given-1.png)
 
 
 
-![hermite-given-2](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第三次上机\hermite-given-2.png)
+![hermite-given-2](hermite-given-2.png)
 
 
 
@@ -69,13 +69,13 @@
 
 #####　接下来是自己尝试的切向量和随意点
 
-![hermite-random-1](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第三次上机\hermite-random-1.png)
+![hermite-random-1](hermite-random-1.png)
 
-![hermite-random-2](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第三次上机\hermite-random-2.png)
+![hermite-random-2](hermite-random-2.png)
 
 
 
-![hermite-random-3](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第三次上机\hermite-random-3.png)
+![hermite-random-3](hermite-random-3.png)
 
 
 
@@ -89,19 +89,19 @@
 
 
 
-![moveline-code](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第三次上机\moveline-code.png)
+![moveline-code](moveline-code.png)
 
 
 
-![moveline1](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第三次上机\moveline1.png)
+![moveline1](moveline1.png)
 
 
 
-![moveline2](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第三次上机\moveline2.png)
+![moveline2](moveline2.png)
 
 
 
-![moveline3](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第三次上机\moveline3.png)
+![moveline3](moveline3.png)
 
 
 
@@ -111,27 +111,27 @@
 
 
 
-![Circle-code](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第三次上机\Circle-code.png)
+![Circle-code](Circle-code.png)
 
 
 
-![Circle-1](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第三次上机\Circle-1.png)
+![Circle-1](Circle-1.png)
 
 
 
-![Circle-2](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第三次上机\Circle-2.png)
+![Circle-2](Circle-2.png)
 
 
 
-![Circle-3](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第三次上机\Circle-3.png)
+![Circle-3](Circle-3.png)
 
 
 
-![Circle-4](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第三次上机\Circle-4.png)
+![Circle-4](Circle-4.png)
 
 
 
-![Circle-5](C:\Users\Magneto_Wang\Documents\个人文件系列\大学作业\大三下学期作业\计算机图形学\第三次上机\Circle-5.png)
+![Circle-5](Circle-5.png)
 
 
 
