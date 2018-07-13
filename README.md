@@ -14,7 +14,7 @@ Java文件中的Graphics是草稿类，没有其他功能
 
 ## 文件说明
 
-### [效果展示](https://github.com/MagnetoWang/ComputerGraphics/tree/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA)[：包含所有必要代码执行的截图](https://github.com/MagnetoWang/ComputerGraphics/tree/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA)
+## [效果展示](https://github.com/MagnetoWang/ComputerGraphics/tree/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA)[：包含所有必要代码执行的截图](https://github.com/MagnetoWang/ComputerGraphics/tree/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA)
 
 
 
@@ -105,7 +105,7 @@ Java文件中的Graphics是草稿类，没有其他功能
 则$a=y_0-y_1, b=x_1-x_0, c=x_0y_1-x_1y_0$
 由常识知：
 
-![1531310822460](picture/基本光栅图形学-中点线算法3.png)
+![1531310822460](picture\基本光栅图形学-中点线算法3.png)
 
 
 评价：欲判断中点M点是在Q点上方还是在Q点下方，只需把M代入F(x,y),并检查它的符号。
@@ -128,7 +128,7 @@ $$
 - 若d < 0 - >M在直线下方->取NE;
 - 此时再下一个象素的判别式为
 $$
-     d_2= F(x_p+2, y_p+1.5)
+d_2= F(x_p+2, y_p+1.5)
        =a(x_p+2)+b(y_p+1.5)+c
      = a(x_p +1)+b(y_p +0.5)+c +a +b =d+a+b ；
 $$
@@ -676,6 +676,41 @@ int main(int argc, char **argv) {
 	- 确定一条线段是否整个位于窗口内，若是，则取之。
 	- 确定该线段是否整个位于窗口外，若是，则弃之。
 	- 若第1、2步判断均不成立，则通过窗口边界所在的直线将线段分成两部分，再对每一部分进行第1、2步的测式。
+
+
+
+
+
+
+
+
+
+# 换一种写法。上面那样太费时了
+- Sutherland-Hodgman算法(多边形裁剪)：https://blog.csdn.net/u011706736/article/details/52525094
+- Bezier曲线原理
+	- https://blog.csdn.net/joogle/article/details/7975118
+	- https://en.wikipedia.org/wiki/B%C3%A9zier_curve
+- 圆的扫描转换-中点Bresenham算法：https://blog.csdn.net/jxch____/article/details/80723185
+- B样条曲线：https://zh.wikipedia.org/zh-hans/B%E6%A0%B7%E6%9D%A1
+
+
+
+# 考完试啦！该项目有时间再维护！
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
